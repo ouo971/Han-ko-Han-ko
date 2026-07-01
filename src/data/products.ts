@@ -22,11 +22,11 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   // ==========================================
-  // CONE YARNS (Goodsil Lucky Cone Yarns - matching Goodsil screenshot)
+  // CONE YARNS (Goodsil Lucky Cone Yarns)
   // ==========================================
   {
     id: 1,
-    name: "[럭키콘사] 외국콘사32 WOLLY(400g) 캐시미어함유",
+    name: "외국콘사32 WOLLY(400g) 캐시미어함유",
     category: "cone",
     material: "Wool / Cashmere Blend",
     price: 24000,
@@ -40,14 +40,14 @@ export const PRODUCTS: Product[] = [
     isSale: true,
     colors: ["오트밀 멜란지", "아이보리", "그레이"],
     colorHexes: ["#D2B48C", "#FFFFF0", "#808080"],
-    info: "굿실 럭키콘사 카테고리의 인기 WOLLY 수입 콘사입니다. 캐시미어 함유로 기분 좋은 솜털 터치감과 가을겨울용 보온성을 선사합니다.",
+    info: "굿실 럭키콘사 카테고리의 인기 WOLLY 수입 콘사입니다. 캐시미어 함유로 기분 좋은 솜털 터치감 and 가을겨울용 보온성을 선사합니다.",
     weight: "약 400g",
     needles: "대바늘 3.5mm ~ 4.5mm",
     wash: "중성세제 울샴푸 미지근한 물 단독 손세탁"
   },
   {
     id: 2,
-    name: "[럭키콘사] 외국콘사38 BIZARRE(420g) 봄여름가을",
+    name: "외국콘사38 BIZARRE(420g) 봄여름가을",
     category: "cone",
     material: "Viscose Blend",
     price: 26000,
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "[럭키콘사] 외국콘사37 CHIC(420g) 봄여름",
+    name: "외국콘사37 CHIC(420g) 봄여름",
     category: "cone",
     material: "Cotton Blend",
     price: 25000,
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    name: "[럭키콘사] 외국콘사36 ALLEGRO(420g) 봄여름",
+    name: "외국콘사36 ALLEGRO(420g) 봄여름",
     category: "cone",
     material: "Linen Blend",
     price: 28000,
@@ -110,7 +110,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    name: "[럭키콘사] 외국콘사35 BATISTA 1456 TINTO(420g) 봄여름",
+    name: "외국콘사35 BATISTA 1456 TINTO(420g) 봄여름",
     category: "cone",
     material: "Cotton Blend",
     price: 36000,
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 6,
-    name: "[럭키콘사] 외국콘사34 TIGNANELLO(420g) 여름",
+    name: "외국콘사34 TIGNANELLO(420g) 여름",
     category: "cone",
     material: "Linen Blend",
     price: 24000,
@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 7,
-    name: "[럭키콘사] 럭키콘사260 신축성이 있는 폴리혼합콘사(420g) 봄가을",
+    name: "럭키콘사260 신축성이 있는 폴리혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Poly/Wool Blend",
     price: 21000,
@@ -173,7 +173,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 8,
-    name: "[럭키콘사] 럭키콘사259 다홍울혼합콘사(420g) 봄가을",
+    name: "럭키콘사259 다홍울혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Wool / Poly Blend",
     price: 23000,
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 9,
-    name: "[럭키콘사] 럭키콘사258 블랙울콘사(420g) 겨울",
+    name: "럭키콘사258 블랙울콘사(420g) 겨울",
     category: "cone",
     material: "Wool 100%",
     price: 32000,
@@ -215,7 +215,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 10,
-    name: "[럭키콘사] 럭키콘사257 희끗하게 표현한 울혼합콘사(420g) 봄가을",
+    name: "럭키콘사257 희끗하게 표현한 울혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Wool Blend",
     price: 29000,
@@ -236,11 +236,11 @@ export const PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // BALL YARNS (10 Sevy Yarns - matching Sevy screenshot)
+  // BALL YARNS (10 Sevy Yarns)
   // ==========================================
   {
     id: 30,
-    name: "[세비] 플러피 알파카 뜨개실 (50g)",
+    name: "플러피 알파카 뜨개실 (50g)",
     category: "ball",
     material: "Superfine Alpaca Blend",
     price: 9500,
@@ -261,7 +261,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 31,
-    name: "[세비] 미스티 메리노 울 키트실 (50g)",
+    name: "미스티 메리노 울 키트실 (50g)",
     category: "ball",
     material: "Merino Wool / Polyamide",
     price: 11000,
@@ -282,7 +282,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 32,
-    name: "[세비] 하비울 울혼방 뜨개실 (50g)",
+    name: "하비울 울혼방 뜨개실 (50g)",
     category: "ball",
     material: "Wool 50% + Acrylic 50%",
     price: 6800,
@@ -303,7 +303,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 33,
-    name: "[세비] 올림푸스 모후 수피마 코튼 혼합실 (40g)",
+    name: "올림푸스 모후 수피마 코튼 혼합실 (40g)",
     category: "ball",
     material: "Supima Cotton Blend",
     price: 8800,
@@ -324,7 +324,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 34,
-    name: "[세비] 몬디알 몰토베네 나염 볼사 (50g)",
+    name: "몬디알 몰토베네 나염 볼사 (50g)",
     category: "ball",
     material: "Wool / Acrylic Blend",
     price: 10800,
@@ -345,7 +345,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 35,
-    name: "[세비] 몬디알 수아브 멜란지 울혼방 실 (50g)",
+    name: "몬디알 수아브 멜란지 울혼방 실 (50g)",
     category: "ball",
     material: "Merino Wool Blend",
     price: 9800,
@@ -366,7 +366,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 36,
-    name: "[세비] 몬디알 슈퍼 트위드 (50g)",
+    name: "몬디알 슈퍼 트위드 (50g)",
     category: "ball",
     material: "Merino Wool 80% + Acrylic 20%",
     price: 11700,
@@ -387,7 +387,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 37,
-    name: "[세비] 베이비 알파카 코튼 실 (50g)",
+    name: "베이비 알파카 코튼 실 (50g)",
     category: "ball",
     material: "Baby Alpaca Blend",
     price: 12000,
@@ -408,7 +408,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 38,
-    name: "[세비] 메리노 코튼 실 50g 볼",
+    name: "메리노 코튼 실 50g 볼",
     category: "ball",
     material: "Merino Wool 50% + Cotton 50%",
     price: 8800,
@@ -429,7 +429,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 39,
-    name: "[세비] 트위드 에코 뜨개실 (50g)",
+    name: "트위드 에코 뜨개실 (50g)",
     category: "ball",
     material: "Recycled Wool Blend",
     price: 12600,
@@ -454,7 +454,7 @@ export const PRODUCTS: Product[] = [
   // ==========================================
   {
     id: 15,
-    name: "[한코키트] 자도르 아란 스웨터 DIY 패키지",
+    name: "자도르 아란 스웨터 DIY 패키지",
     category: "kit",
     material: "Kit (Yarn + Pattern + Guide Video)",
     price: 62000,
@@ -475,7 +475,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 16,
-    name: "[한코키트] 그래니 스퀘어 숄더백 코바늘 패키지",
+    name: "그래니 스퀘어 숄더백 코바늘 패키지",
     category: "kit",
     material: "Kit (Yarn + Pattern + Guide Video)",
     price: 29000,
@@ -500,7 +500,7 @@ export const PRODUCTS: Product[] = [
   // ==========================================
   {
     id: 21,
-    name: "[바늘] 니트프로 심포니 우드 조립식 대바늘 세트",
+    name: "니트프로 심포니 우드 조립식 대바늘 세트",
     category: "tools",
     material: "Birch Wood",
     price: 92000,
@@ -521,7 +521,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 22,
-    name: "[부자재] 골드 클래식 쪽가위 & 수제 스티치 마커 세트",
+    name: "골드 클래식 쪽가위 & 수제 스티치 마커 세트",
     category: "tools",
     material: "Brass / Acrylic",
     price: 12000,
@@ -546,7 +546,7 @@ export const PRODUCTS: Product[] = [
   // ==========================================
   {
     id: 25,
-    name: "[도안] 베를린 리브 스카프 서술형 PDF 도안",
+    name: "베를린 리브 스카프 서술형 PDF 도안",
     category: "patterns",
     material: "Digital PDF Pattern",
     price: 6000,
@@ -567,7 +567,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 26,
-    name: "[도안] 오슬로 꼬임 케이블 카디건 PDF 도안",
+    name: "오슬로 꼬임 케이블 카디건 PDF 도안",
     category: "patterns",
     material: "Digital PDF Pattern",
     price: 9000,
