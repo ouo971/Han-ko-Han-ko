@@ -9,6 +9,7 @@ import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { SuccessOverlay } from "@/components/SuccessOverlay";
+import { AuthModal } from "@/components/AuthModal";
 import { KnittingLounge } from "@/components/KnittingLounge";
 import { Footer } from "@/components/Footer";
 import { Product, PRODUCTS } from "@/data/products";
@@ -26,6 +27,10 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // --- Auth & Profile State ---
+  const [currentUser, setCurrentUser] = useState<{ name: string; email: string; phone: string; address: string } | null>(null);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   // --- Modal & Drawer Open States ---
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -46,8 +51,10 @@ export default function Home() {
     try {
       const storedCart = localStorage.getItem("hanko_cart");
       const storedWishlist = localStorage.getItem("hanko_wishlist");
+      const storedUser = localStorage.getItem("hanko_user");
       if (storedCart) setCart(JSON.parse(storedCart));
       if (storedWishlist) setWishlist(JSON.parse(storedWishlist));
+      if (storedUser) setCurrentUser(JSON.parse(storedUser));
     } catch (e) {
       console.error("Failed to load state from localStorage:", e);
     }
@@ -77,6 +84,13 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [toastMessage]);
+
+  // --- Logout Handler ---
+  const handleLogout = () => {
+    localStorage.removeItem("hanko_user");
+    setCurrentUser(null);
+    showNotification("로그아웃되었습니다. 🧶");
+  };
 
   // --- Cart Actions ---
   const handleAddToCart = (id: number, color: string, quantity: number = 1) => {
@@ -160,9 +174,14 @@ export default function Home() {
     saveCartToStorage(updatedCart);
     setIsDetailOpen(false);
 
-    // Open checkout modal after brief delay
+    // Open checkout modal or redirect to login after brief delay
     setTimeout(() => {
-      setIsCheckoutOpen(true);
+      if (!currentUser) {
+        alert("주문을 진행하려면 먼저 로그인 또는 회원가입을 해주세요. 🧶");
+        setIsAuthOpen(true);
+      } else {
+        setIsCheckoutOpen(true);
+      }
     }, 300);
   };
 
@@ -185,6 +204,9 @@ export default function Home() {
         cartCount={cartCount}
         wishlistCount={wishlist.length}
         activeCategory={activeCategory}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthOpen(true)}
+        onLogout={handleLogout}
         onCategoryChange={setActiveCategory}
         onSearch={setSearchQuery}
         onOpenCart={() => setIsCartOpen(true)}
@@ -249,6 +271,12 @@ export default function Home() {
             showNotification("장바구니가 비어 있습니다. 주문하실 상품을 먼저 담아주세요!");
             return;
           }
+          if (!currentUser) {
+            alert("주문을 진행하려면 먼저 로그인 또는 회원가입을 해주세요. 🧶");
+            setIsCartOpen(false);
+            setIsAuthOpen(true);
+            return;
+          }
           setIsCartOpen(false);
           setIsCheckoutOpen(true);
         }}
@@ -259,7 +287,18 @@ export default function Home() {
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         cart={cart}
+        currentUser={currentUser}
         onOrderSuccess={handleOrderSuccess}
+      />
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onAuthSuccess={(user) => {
+          setCurrentUser(user);
+          showNotification(`${user.name}님, 로그인되었습니다.`);
+        }}
       />
 
       {/* Success Order Confirmation Overlay */}

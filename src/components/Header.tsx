@@ -7,6 +7,9 @@ interface HeaderProps {
   cartCount: number;
   wishlistCount: number;
   activeCategory: string;
+  currentUser: { name: string; email: string; phone: string; address: string } | null;
+  onOpenAuth: () => void;
+  onLogout: () => void;
   onCategoryChange: (category: string) => void;
   onSearch: (query: string) => void;
   onOpenCart: () => void;
@@ -16,6 +19,9 @@ export const Header: React.FC<HeaderProps> = ({
   cartCount,
   wishlistCount,
   activeCategory,
+  currentUser,
+  onOpenAuth,
+  onLogout,
   onCategoryChange,
   onSearch,
   onOpenCart,
@@ -38,6 +44,19 @@ export const Header: React.FC<HeaderProps> = ({
   const handleCategoryClick = (category: string) => {
     onCategoryChange(category);
     scrollToShop();
+  };
+
+  const handleProfileClick = () => {
+    if (currentUser) {
+      const confirmLogout = window.confirm(
+        `🧶 안녕하세요, ${currentUser.name}님!\n\n[회원 정보]\n• 이메일: ${currentUser.email}\n• 연락처: ${currentUser.phone}\n• 배송지: ${currentUser.address}\n\n로그아웃하시겠습니까?`
+      );
+      if (confirmLogout) {
+        onLogout();
+      }
+    } else {
+      onOpenAuth();
+    }
   };
 
   return (
@@ -92,9 +111,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Wishlist Button */}
           <button
             onClick={() => {
-              // We could filter the catalog to show wishlist if we want, or just show a nice message
               handleCategoryClick("all");
-              // Option: trigger active category 'wishlist' to show wishlist
               onCategoryChange("wishlist");
             }}
             className="relative p-2 text-brand-dark hover:text-brand-primary transition-colors group"
@@ -124,9 +141,11 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Profile Button */}
           <button
-            className="p-2 text-brand-dark hover:text-brand-primary transition-colors"
-            title="마이페이지"
-            onClick={() => alert("한코한코 회원 페이지는 준비 중입니다. 🧶")}
+            className={`p-2 transition-colors ${
+              currentUser ? "text-brand-primary hover:text-brand-dark" : "text-brand-dark hover:text-brand-primary"
+            }`}
+            title={currentUser ? "회원 정보" : "로그인 / 회원가입"}
+            onClick={handleProfileClick}
           >
             <User className="w-6 h-6" />
           </button>
