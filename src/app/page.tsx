@@ -10,6 +10,8 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
 import { SuccessOverlay } from "@/components/SuccessOverlay";
 import { AuthModal } from "@/components/AuthModal";
+import { QnaBoard } from "@/components/QnaBoard";
+import { ChatBotWidget } from "@/components/ChatBotWidget";
 import { KnittingLounge } from "@/components/KnittingLounge";
 import { Footer } from "@/components/Footer";
 import { Product, PRODUCTS } from "@/data/products";
@@ -220,17 +222,21 @@ export default function Home() {
         {/* Category Quick Links */}
         <CategoryQuickLinks onCategorySelect={setActiveCategory} />
 
-        {/* Catalog */}
-        <ProductCatalog
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-          searchQuery={searchQuery}
-          onClearSearch={() => setSearchQuery("")}
-          wishlist={wishlist}
-          onWishlistToggle={handleWishlistToggle}
-          onQuickAdd={handleAddToCart}
-          onProductClick={handleProductClick}
-        />
+        {/* Catalog / Qna Board */}
+        {activeCategory === "qna" ? (
+          <QnaBoard currentUser={currentUser} />
+        ) : (
+          <ProductCatalog
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+            searchQuery={searchQuery}
+            onClearSearch={() => setSearchQuery("")}
+            wishlist={wishlist}
+            onWishlistToggle={handleWishlistToggle}
+            onQuickAdd={handleAddToCart}
+            onProductClick={handleProductClick}
+          />
+        )}
 
         {/* Community & About info */}
         <KnittingLounge />
@@ -309,6 +315,9 @@ export default function Home() {
         address={checkoutSuccess?.address || ""}
         onConfirm={() => setCheckoutSuccess(null)}
       />
+
+      {/* Chatbot Floating Widget */}
+      <ChatBotWidget />
     </div>
   );
 }

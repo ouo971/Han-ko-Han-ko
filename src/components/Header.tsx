@@ -228,6 +228,18 @@ export const Header: React.FC<HeaderProps> = ({
                 도안(PDF)
               </button>
             </li>
+            <li>
+              <button
+                onClick={() => handleCategoryClick("qna")}
+                className={`font-semibold tracking-wider transition-colors ${
+                  activeCategory === "qna"
+                    ? "text-brand-primary border-b-2 border-brand-primary pb-0.5"
+                    : "text-brand-dark hover:text-brand-primary"
+                }`}
+              >
+                Q&A 게시판
+              </button>
+            </li>
           </ul>
 
           <ul className="flex items-center justify-center gap-6 py-2 sm:py-3 text-xs sm:text-sm text-brand-dark-muted font-medium">
