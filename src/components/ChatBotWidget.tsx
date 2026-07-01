@@ -127,7 +127,7 @@ export const ChatBotWidget: React.FC = () => {
           const connectMsg: Message = {
             id: `system-connected-${Date.now()}`,
             sender: "bot",
-            text: "🔔 상담원(대표 박유진)님이 연결되었습니다. 문의하실 사항을 편하게 말씀해 주세요! 🧶",
+            text: "🔔 상담원 Han-ko님이 연결되었습니다. 문의하실 사항을 편하게 말씀해 주세요! 🧶",
             timestamp: new Date(),
           };
 
@@ -260,7 +260,7 @@ export const ChatBotWidget: React.FC = () => {
               </div>
               <div>
                 <h4 className="text-xs font-bold tracking-wide">
-                  {isAgentConnected ? "상담원 박유진 연결 중" : "한코 챗봇 상담센터"}
+                  {isAgentConnected ? "상담원 Han-ko 연결 중" : "한코 챗봇 상담센터"}
                 </h4>
                 <span className="text-[10px] text-brand-primary font-light block -mt-0.5">
                   {isAgentConnected ? "실시간 메신저가 활성화되었습니다." : "상담원 코코가 실시간 대기 중입니다."}
