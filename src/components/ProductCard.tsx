@@ -93,6 +93,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <h4 className="text-sm font-semibold text-brand-dark line-clamp-2 hover:text-brand-primary transition-colors leading-snug">
             {name}
           </h4>
+          {/* Color Dots */}
+          {product.colorHexes && product.colorHexes.length > 0 && (
+            <div className="flex gap-1.5 mt-2.5 flex-wrap">
+              {product.colorHexes.map((hex, idx) => (
+                <span
+                  key={idx}
+                  className="w-3.5 h-3.5 rounded-full border border-black/10 inline-block shadow-sm"
+                  style={{ backgroundColor: hex }}
+                  title={product.colors[idx]}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="mt-4 pt-4 border-t border-brand-light-gray/60 space-y-2">

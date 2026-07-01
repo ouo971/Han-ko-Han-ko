@@ -147,19 +147,29 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="mt-6 space-y-2">
                 <span className="text-xs font-semibold text-brand-dark-muted block">실 색상 선택</span>
                 <div className="flex flex-wrap gap-2.5">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`px-4 py-2 rounded-full text-xs font-medium border transition-colors ${
-                        selectedColor === color
-                          ? "bg-brand-primary border-brand-primary text-brand-dark"
-                          : "bg-white border-brand-light-gray text-brand-dark hover:border-brand-primary/55"
-                      }`}
-                    >
-                      {color}
-                    </button>
-                  ))}
+                  {product.colors.map((color, idx) => {
+                    const hex = product.colorHexes?.[idx] || "#ccc";
+                    const isActive = selectedColor === color;
+                    return (
+                      <button
+                        key={color}
+                        onClick={() => setSelectedColor(color)}
+                        className={`px-4 py-2 rounded-full text-xs font-medium border flex items-center gap-2.5 transition-colors ${
+                          isActive
+                            ? "bg-brand-primary border-brand-primary text-brand-dark"
+                            : "bg-white border-brand-light-gray text-brand-dark hover:border-brand-primary/55"
+                        }`}
+                      >
+                        {product.colorHexes && product.colorHexes[idx] && (
+                          <span
+                            className="w-3.5 h-3.5 rounded-full border border-black/10 inline-block shadow-sm"
+                            style={{ backgroundColor: hex }}
+                          />
+                        )}
+                        <span>{color}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
