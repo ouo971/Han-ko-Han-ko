@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한코한코 (Han-ko Han-ko) - 따뜻함을 뜨는 감성 뜨개숍</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 0. Top Banner Notification -->
+    <div class="top-banner">
+        <p>🎉 한코한코 오픈 이벤트! 첫 구매 고객 모두에게 10% 특별 할인 쿠폰을 드립니다 🎁</p>
+    </div>
+
+    <!-- 1. Header Area -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Brand Logo -->
+            <a href="#" class="logo">
+                <span class="logo-kr">한코한코</span>
+                <span class="logo-en">Han-ko Han-ko</span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="굿실 콘사, 램스울, DIY 패키지를 찾아보세요...">
+                <button type="button" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="action-btn" id="wishlist-trigger" title="위시리스트">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge" id="wishlist-count">0</span>
+                </button>
+                <button class="action-btn" id="cart-trigger" title="장바구니">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </button>
+                <button class="action-btn" id="profile-btn" title="마이페이지">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-category="all">HOME</a></li>
+                    <li><a href="#" class="nav-link" data-category="cone">콘사(Cone Yarn)</a></li>
+                    <li><a href="#" class="nav-link" data-category="ball">볼실(Skein)</a></li>
+                    <li><a href="#" class="nav-link" data-category="kit">DIY 키트</a></li>
+                    <li><a href="#" class="nav-link" data-category="tools">바늘/부자재</a></li>
+                    <li><a href="#" class="nav-link" data-category="patterns">도안(PDF)</a></li>
+                </ul>
+                <ul class="nav-sub">
+                    <li><a href="#knitting-lounge" class="sub-link"><i class="fa-solid fa-mug-hot"></i> 뜨개 라운지</a></li>
+                    <li><a href="#about-store" class="sub-link">브랜드 이야기</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 2. Hero Image Slider -->
+    <section class="hero-slider">
+        <div class="slides-container">
+            <!-- Slide 1 (Active) -->
+            <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url('assets/hero_banner.png');">
+                <div class="slide-content">
+                    <span class="slide-tag">SLOW LIFE & KNITTING</span>
+                    <h2>세상의 모든 따뜻함을 엮는 곳</h2>
+                    <p>정성을 담아 한 코씩 떠내려가는 편안하고 느린 삶의 미학,<br>한코한코가 엄선한 고품질 뜨개실과 함께 시작해 보세요.</p>
+                    <a href="#shop-section" class="btn btn-primary">쇼핑하러 가기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url('assets/cone_yarn.png');">
+                <div class="slide-content">
+                    <span class="slide-tag">GOODSIL PREMIUM LINE</span>
+                    <h2>굿실(Goodsil) 시그니처 콘사 컬렉션</h2>
+                    <p>1984년부터 이어져 온 신뢰의 품질. 램스울부터 메리노 울까지,<br>다채로운 굵기와 색상의 프리미엄 콘사를 독점 혜택으로 만나보세요.</p>
+                    <a href="#shop-section" class="btn btn-primary" id="go-to-cone-btn">콘사 기획전 보기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Slider Controls -->
+        <button class="slide-arrow prev-slide"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slide-arrow next-slide"><i class="fa-solid fa-chevron-right"></i></button>
+        <!-- Slider Dots -->
+        <div class="slider-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </section>
+
+    <!-- 3. Category Quick Links -->
+    <section class="quick-links">
+        <div class="container">
+            <div class="section-header text-center">
+                <h3>무엇을 뜨고 싶으신가요?</h3>
+                <p>원하는 카테고리로 빠르게 이동하여 필요한 재료를 찾아보세요.</p>
+            </div>
+            <div class="quick-grid">
+                <div class="quick-card" data-category="cone">
+                    <div class="icon-wrap">
+                        <img src="assets/cone_yarn.png" alt="콘사">
+                    </div>
+                    <span>콘사(Cone)</span>
+                </div>
+                <div class="quick-card" data-category="ball">
+                    <div class="icon-wrap">
+                        <img src="assets/ball_yarn.png" alt="볼실">
+                    </div>
+                    <span>볼실(Skein)</span>
+                </div>
+                <div class="quick-card" data-category="kit">
+                    <div class="icon-wrap">
+                        <img src="assets/diy_kit.png" alt="DIY 키트">
+                    </div>
+                    <span>DIY 키트</span>
+                </div>
+                <div class="quick-card" data-category="tools">
+                    <div class="icon-wrap">
+                        <img src="assets/tools.png" alt="부자재">
+                    </div>
+                    <span>바늘/부자재</span>
+                </div>
+                <div class="quick-card" data-category="patterns">
+                    <div class="icon-wrap">
+                        <img src="assets/pattern_image.png" alt="도안">
+                    </div>
+                    <span>뜨개도안</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Main Shop Catalog -->
+    <section class="shop-section" id="shop-section">
+        <div class="container">
+            <div class="shop-header">
+                <div class="shop-title-area">
+                    <h2>한코한코의 추천 뜨개용품</h2>
+                    <p>초보자부터 전문가까지, 뜨개인의 만족을 높여줄 엄선된 상품들</p>
+                </div>
+                <!-- Filter Tabs & Sorters -->
+                <div class="shop-filters">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">전체보기</button>
+                        <button class="filter-tab" data-filter="cone">콘사(Cone)</button>
+                        <button class="filter-tab" data-filter="ball">볼실(Skein)</button>
+                        <button class="filter-tab" data-filter="kit">DIY 키트</button>
+                        <button class="filter-tab" data-filter="tools">바늘/도구</button>
+                        <button class="filter-tab" data-filter="patterns">도안(PDF)</button>
+                    </div>
+                    <div class="sort-selector">
+                        <label for="sort-select" class="sr-only">정렬 방식</label>
+                        <select id="sort-select">
+                            <option value="recommend">추천순</option>
+                            <option value="new">신상품순</option>
+                            <option value="low-price">낮은 가격순</option>
+                            <option value="high-price">높은 가격순</option>
+                            <option value="popular">리뷰 많은순</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Alert Status -->
+            <div class="search-status-bar hide" id="search-status-bar">
+                <span id="search-query-text">"콘사"</span> 검색결과 <strong id="search-results-count">0</strong>건
+                <button type="button" class="clear-search-btn" id="clear-search-btn"><i class="fa-solid fa-xmark"></i> 지우기</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be dynamically generated by app.js -->
+                <div class="loading-spinner">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> 상품을 가져오는 중입니다...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Knitting Lounge / Brand Story -->
+    <section class="knitting-lounge" id="knitting-lounge">
+        <div class="container">
+            <div class="lounge-layout">
+                <!-- Left: YouTube Tutorial & Tips -->
+                <div class="lounge-tips">
+                    <div class="section-header">
+                        <span class="sub-title">GUIDE & TIPS</span>
+                        <h3>처음이어도 괜찮아요</h3>
+                        <p>한코한코에서 준비한 동영상 가이드와 뜨개 팁으로 손쉽게 배워보세요.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="video-mockup">
+                            <img src="assets/pattern_image.png" alt="동영상 섬네일">
+                            <div class="play-overlay">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="tip-info">
+                            <span class="tip-tag">초보 가이드</span>
+                            <h4>코잡기부터 겉뜨기, 안뜨기까지 한눈에 보기</h4>
+                            <p>대바늘 뜨개의 가장 기초가 되는 기본 기법들을 5분 만에 마스터할 수 있도록 친절히 설명해 드립니다.</p>
+                            <a href="https://youtube.com" target="_blank" class="tip-link">가이드 영상 보러가기 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Customer Review Gallery (뜨개 자랑) -->
+                <div class="lounge-gallery">
+                    <div class="section-header">
+                        <span class="sub-title">OUR COMMUNITY</span>
+                        <h3>이웃들의 뜨개 이야기</h3>
+                        <p>직접 뜨신 예쁜 완성작들을 공유하고 소통해 보세요.</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="assets/diy_kit.png" alt="갤러리 1">
+                            <div class="gallery-hover">
+                                <span>@knit_lover_mj</span>
+                                <p>자도르 스웨터 키트로 완성! 실이 너무 촉촉하고 부드러워요 🧶</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/cone_yarn.png" alt="갤러리 2">
+                            <div class="gallery-hover">
+                                <span>@hanko_story</span>
+                                <p>굿실 램스울 콘사로 뜬 배색 가디건. 색감이 예술입니다!</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/hero_banner.png" alt="갤러리 3">
+                            <div class="gallery-hover">
+                                <span>@slow_knitter</span>
+                                <p>가을 맞이 조끼 드디어 완성! 한코한코 패키지 최고예요 👍</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/pattern_image.png" alt="갤러리 4">
+                            <div class="gallery-hover">
+                                <span>@crochet_ddatatteu</span>
+                                <p>베를린 스카프 도안으로 이틀만에 완성했어요. 선물용으로 딱!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. About Han-ko Han-ko Section -->
+    <section class="about-store" id="about-store">
+        <div class="container text-center">
+            <div class="about-card">
+                <h2>한코한코가 약속하는 슬로우 라이프</h2>
+                <div class="card-divider"></div>
+                <p>우리는 단순히 뜨개용품을 판매하는 것을 넘어,<br>복잡하고 빠른 세상 속에서 손끝의 온기와 함께 누리는 느리고 평온한 시간을 지향합니다.</p>
+                <p><strong>세비</strong>의 현대적이고 감성적인 스타일링 가치와 <strong>굿실</strong>의 40년 전통 프리미엄 소재 신뢰성을 엮어,<br>초보 뜨개인부터 오랜 장인까지 믿고 쓸 수 있는 완벽한 뜨개 가이드를 제공하겠습니다.</p>
+                <div class="features-row">
+                    <div class="feature-item">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <h5>고품질 천연 섬유</h5>
+                        <p>피부에 닿아도 안심할 수 있는 엄선된 울, 면, 캐시미어 혼방실만을 다룹니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <h5>맞춤형 DIY 패키지</h5>
+                        <p>초보자도 도안과 동영상을 보며 완벽하게 코를 채울 수 있는 패키지 구성을 선보입니다.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <h5>손뜨개의 힐링 문화</h5>
+                        <p>뜨개질을 하는 조용하고 가치 있는 시간 그 자체를 위한 커뮤니티 공간을 만듭니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer Area -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>한코한코 (Han-ko Han-ko)</h4>
+                <p>주식회사 한코컴퍼니 | 대표자: 뜨개왕 | 서울특별시 성동구 아차산로 7길 3F (세비하우스 옆)</p>
+                <p>사업자등록번호: 123-45-67890 | 통신판매업신고: 제 2026-서울성동-0000호</p>
+                <p class="copyright">Copyright &copy; 2026 Han-ko Han-ko. All rights reserved.</p>
+            </div>
+            <div class="footer-cs">
+                <h4>고객센터 (Customer Center)</h4>
+                <p class="phone">1544-2525</p>
+                <p>평일 10:00 - 17:00 (점심시간 12:00 - 13:00)</p>
+                <p>주말 및 공휴일 휴무 | 이메일: cs@han-ko.co.kr</p>
+            </div>
+            <div class="footer-social">
+                <h4>우리와 연결되세요</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" title="인스타그램"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank" title="유튜브"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://pinterest.com" target="_blank" title="핀터레스트"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+                <div class="footer-tagline">
+                    <p>“정성 어린 한 코 한 코가 모여 당신만의 따뜻한 세상이 됩니다.”</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== INTERACTIVE DRAWER & MODAL OVERLAYS ==================== -->
+
+    <!-- Backdrop Overlay for general modals -->
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <!-- A. Cart Drawer (Slide-out from Right) -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> 내 장바구니</h3>
+            <button class="close-drawer" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <!-- Cart Items list -->
+        <div class="drawer-body" id="cart-items-container">
+            <!-- Dynamically populated or empty message -->
+            <div class="empty-cart-message">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <p>장바구니가 비어 있습니다.<br>예쁜 실과 패키지를 가득 담아보세요!</p>
+                <a href="#shop-section" class="btn btn-secondary close-drawer">쇼핑 계속하기</a>
+            </div>
+        </div>
+        <!-- Cart Footer -->
+        <div class="drawer-footer" id="cart-drawer-footer">
+            <div class="price-row">
+                <span>상품 합계</span>
+                <span id="cart-subtotal">0원</span>
+            </div>
+            <div class="price-row">
+                <span>배송비 <small>(5만원 이상 무료)</small></span>
+                <span id="cart-shipping">0원</span>
+            </div>
+            <div class="price-row total">
+                <span>최종 결제 금액</span>
+                <strong id="cart-total">0원</strong>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkout-trigger">주문하기 <i class="fa-solid fa-credit-card"></i></button>
+        </div>
+    </div>
+
+    <!-- B. Product Detail Modal -->
+    <div class="product-detail-modal" id="product-detail-modal">
+        <button class="close-modal" id="close-detail-modal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-grid" id="modal-content-container">
+            <!-- Will be populated dynamically by app.js -->
+        </div>
+    </div>
+
+    <!-- C. Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <button class="close-modal" id="close-checkout-modal"><i class="fa-solid fa-xmark"></i></button>
+        <div class="checkout-container">
+            <h3>주문서 작성</h3>
+            <div class="checkout-divider"></div>
+            
+            <form id="checkout-form">
+                <!-- Delivery Info -->
+                <div class="form-section">
+                    <h4>배송지 정보</h4>
+                    <div class="form-group">
+                        <label for="shipping-name">받는 분 성함</label>
+                        <input type="text" id="shipping-name" required placeholder="홍길동">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-phone">연락처</label>
+                        <input type="tel" id="shipping-phone" required placeholder="010-1234-5678">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-zip">우편번호</label>
+                        <div class="zip-wrap">
+                            <input type="text" id="shipping-zip" required placeholder="04782">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="alert('주소 검색은 가상 데모입니다.')">검색</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-address">상세 주소</label>
+                        <input type="text" id="shipping-address" required placeholder="서울특별시 성동구 아차산로 7길 3층 한코타워">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-memo">배송 요청사항</label>
+                        <select id="shipping-memo">
+                            <option value="1">배송 전 미리 연락바랍니다.</option>
+                            <option value="2">부재 시 경비실에 맡겨주세요.</option>
+                            <option value="3">문 앞에 놓아주세요.</option>
+                            <option value="custom">직접 입력</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="form-section">
+                    <h4>결제 방법 선택</h4>
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="card" checked>
+                            <span class="option-card"><i class="fa-regular fa-credit-card"></i> 신용카드</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="bank">
+                            <span class="option-card"><i class="fa-solid fa-building-columns"></i> 무통장입금</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="kakaopay">
+                            <span class="option-card"><span class="kakaopay-badge">Kakao</span> 카카오페이</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="tosspay">
+                            <span class="option-card"><span class="tosspay-badge">Toss</span> 토스페이</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Final Price Box -->
+                <div class="checkout-summary-box">
+                    <div class="summary-row">
+                        <span>총 주문 상품</span>
+                        <span id="checkout-total-items">0개</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>배송비</span>
+                        <span id="checkout-shipping-price">0원</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>최종 결제 예정 금액</span>
+                        <strong id="checkout-final-price">0원</strong>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-order">결제하기 <span id="btn-final-price">0원</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- D. Success Overlay (주문 성공 애니메이션) -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-box">
+            <div class="success-icon-wrap">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>주문이 정상 완료되었습니다!</h2>
+            <p class="desc">정성스럽게 포장하여 빠르게 배송해 드릴게요. 😉</p>
+            
+            <div class="order-details-card">
+                <div class="order-row">
+                    <span>주문번호</span>
+                    <strong id="success-order-id">HK20260630-1002</strong>
+                </div>
+                <div class="order-row">
+                    <span>결제금액</span>
+                    <strong id="success-order-price">34,500원</strong>
+                </div>
+                <div class="order-row">
+                    <span>배송 예정지</span>
+                    <span id="success-order-address" class="address-text">서울특별시 성동구...</span>
+                </div>
+            </div>
+
+            <p class="helper">한코한코에서 가상 쇼핑몰 체험을 완료하셨습니다.</p>
+            <button class="btn btn-primary" id="success-confirm-btn">메인 화면으로 돌아가기</button>
+        </div>
+        <!-- Fireworks visual effect containers -->
+        <div class="fireworks-container" id="fireworks-container"></div>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="app.js"></script>
+</body>
+</html>
