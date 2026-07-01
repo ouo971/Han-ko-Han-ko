@@ -7,6 +7,7 @@ import { Product } from "@/data/products";
 interface ProductDetailModalProps {
   product: Product | null;
   isOpen: boolean;
+  initialSelectedColor?: string | null;
   onClose: () => void;
   isWishlisted: boolean;
   onWishlistToggle: (id: number) => void;
@@ -17,6 +18,7 @@ interface ProductDetailModalProps {
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   product,
   isOpen,
+  initialSelectedColor,
   onClose,
   isWishlisted,
   onWishlistToggle,
@@ -30,12 +32,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   useEffect(() => {
     if (product) {
-      setSelectedColor(product.colors[0]);
+      setSelectedColor(initialSelectedColor || product.colors[0]);
       setQuantity(1);
       setActiveTab("detail");
       setMainImage(product.image);
     }
-  }, [product]);
+  }, [product, initialSelectedColor]);
 
   if (!isOpen || !product) return null;
 
@@ -68,8 +70,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-6">
           {/* Left Column: Gallery */}
           <div className="space-y-4">
-            <div className="aspect-square w-full rounded-2xl overflow-hidden bg-brand-light border border-brand-light-gray">
+            <div className="aspect-square w-full rounded-2xl overflow-hidden bg-brand-light border border-brand-light-gray relative">
               <img src={mainImage} alt={product.name} className="w-full h-full object-cover" />
+              {/* Dynamic Color Tint Overlay */}
+              {product.colorHexes && mainImage === product.image && (
+                <div
+                  className="absolute inset-0 pointer-events-none transition-all duration-300 mix-blend-color opacity-35"
+                  style={{
+                    backgroundColor: product.colorHexes[product.colors.indexOf(selectedColor)] || "#ccc",
+                  }}
+                />
+              )}
             </div>
             <div className="flex gap-4">
               <button

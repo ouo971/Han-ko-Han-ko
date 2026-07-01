@@ -32,6 +32,7 @@ export default function Home() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const [selectedProductColor, setSelectedProductColor] = useState<string | null>(null);
 
   // --- Checkout Success State ---
   const [checkoutSuccess, setCheckoutSuccess] = useState<{
@@ -134,8 +135,9 @@ export default function Home() {
   };
 
   // --- Detail Modal Actions ---
-  const handleProductClick = (id: number) => {
+  const handleProductClick = (id: number, color?: string) => {
     setSelectedProductId(id);
+    setSelectedProductColor(color || null);
     setIsDetailOpen(true);
   };
 
@@ -226,6 +228,7 @@ export default function Home() {
       <ProductDetailModal
         product={activeProduct}
         isOpen={isDetailOpen}
+        initialSelectedColor={selectedProductColor}
         onClose={() => setIsDetailOpen(false)}
         isWishlisted={selectedProductId ? wishlist.includes(selectedProductId) : false}
         onWishlistToggle={handleWishlistToggle}

@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Star, Heart, ShoppingCart } from "lucide-react";
 import { Product } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;
   isWishlisted: boolean;
-  onProductClick: (id: number) => void;
+  onProductClick: (id: number, color?: string) => void;
   onWishlistToggle: (id: number) => void;
   onQuickAdd: (id: number, color: string) => void;
 }
@@ -20,6 +20,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onQuickAdd,
 }) => {
   const { id, name, material, price, origPrice, discount, image, rating, reviews, isBest, isNew } = product;
+
+  // Selected color state for card tinting and quick actions
+  const [selectedColorIdx, setSelectedColorIdx] = useState(0);
 
   // Determine badge markup
   let badgeText = "";
@@ -62,7 +65,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* Product Image & Quick Add */}
       <div
-        onClick={() => onProductClick(id)}
+        onClick={() => onProductClick(id, product.colors[selectedColorIdx])}
         className="relative aspect-square w-full overflow-hidden bg-brand-light cursor-pointer group"
       >
         <img
@@ -72,11 +75,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
+        {/* Dynamic Color Tint Overlay */}
+        {product.colorHexes && product.colorHexes[selectedColorIdx] && (
+          <div
+            className="absolute inset-0 pointer-events-none transition-all duration-300 mix-blend-color opacity-35"
+            style={{
+              backgroundColor: product.colorHexes[selectedColorIdx],
+            }}
+          />
+        )}
+
         {/* Quick Add Button on Hover */}
         <button
           onClick={(e) => {
             e.stopPropagation();
-            onQuickAdd(id, product.colors[0]);
+            onQuickAdd(id, product.colors[selectedColorIdx]);
           }}
           className="absolute inset-x-4 bottom-4 z-10 bg-brand-dark/90 text-white py-2.5 rounded-full flex items-center justify-center gap-2 text-xs font-semibold shadow-lg opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-primary hover:text-brand-dark"
         >
@@ -86,24 +99,37 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* Product Info */}
       <div className="p-5 flex-1 flex flex-col justify-between">
-        <div className="space-y-1.5 cursor-pointer" onClick={() => onProductClick(id)}>
+        <div className="space-y-1.5 cursor-pointer" onClick={() => onProductClick(id, product.colors[selectedColorIdx])}>
           <span className="text-[11px] font-semibold tracking-wider text-brand-dark-muted block uppercase">
             {material}
           </span>
           <h4 className="text-sm font-semibold text-brand-dark line-clamp-2 hover:text-brand-primary transition-colors leading-snug">
             {name}
           </h4>
-          {/* Color Dots */}
+          {/* Color Dots with click selection */}
           {product.colorHexes && product.colorHexes.length > 0 && (
-            <div className="flex gap-1.5 mt-2.5 flex-wrap">
-              {product.colorHexes.map((hex, idx) => (
-                <span
-                  key={idx}
-                  className="w-3.5 h-3.5 rounded-full border border-black/10 inline-block shadow-sm"
-                  style={{ backgroundColor: hex }}
-                  title={product.colors[idx]}
-                />
-              ))}
+            <div className="flex gap-2.5 mt-3 flex-wrap">
+              {product.colorHexes.map((hex, idx) => {
+                const isActive = selectedColorIdx === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedColorIdx(idx);
+                    }}
+                    className={`w-4 h-4 rounded-full border shadow-sm cursor-pointer transition-all duration-200 hover:scale-115 relative flex items-center justify-center ${
+                      isActive ? "ring-2 ring-brand-primary border-transparent scale-110" : "border-black/10"
+                    }`}
+                    style={{ backgroundColor: hex }}
+                    title={product.colors[idx]}
+                  >
+                    {isActive && (
+                      <span className="absolute w-1 h-1 rounded-full bg-white opacity-85 shadow" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
