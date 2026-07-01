@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
             한코한코 (Han-ko Han-ko)
           </h4>
           <div className="space-y-1.5 text-xs text-[#E2DDD6]/80 font-light">
-            <p>주식회사 한코컴퍼니 | 대표자: 뜨개왕 | 서울특별시 성동구 아차산로 7길 3F (세비하우스 옆)</p>
+            <p>주식회사 니팅테일 (Knitting Tale) | 대표자: 박유진 | 서울특별시 성동구 아차산로 7길 3F (세비하우스 옆)</p>
             <p>사업자등록번호: 123-45-67890 | 통신판매업신고: 제 2026-서울성동-0000호</p>
           </div>
           <p className="text-[10px] text-[#E2DDD6]/40 mt-6 font-light">
@@ -25,12 +25,13 @@ export const Footer: React.FC = () => {
           <h4 className="font-serif text-base font-bold text-white tracking-wide">
             고객센터 (Customer Center)
           </h4>
-          <p className="text-3xl font-extrabold text-brand-secondary tracking-wide">
-            1544-2525
+          <p className="text-xl font-bold text-brand-secondary tracking-wide uppercase">
+            1:1 채팅 상담 전용
           </p>
           <div className="space-y-1.5 text-xs text-[#E2DDD6]/80 font-light">
-            <p>평일 10:00 - 17:00 (점심시간 12:00 - 13:00)</p>
-            <p>주말 및 공휴일 휴무 | 이메일: cs@han-ko.co.kr</p>
+            <p>CS 고객상담은 우측 하단의 실시간 챗봇을 통한</p>
+            <p>1:1 채팅 상담으로만 운영됩니다. (평일 10:00 - 17:00)</p>
+            <p>이메일 문의: cs@knittingtale.co.kr</p>
           </div>
         </div>
 
