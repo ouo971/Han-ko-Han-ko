@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
   // ==========================================
   {
     id: 1,
-    name: "외국콘사32 WOLLY(400g) 캐시미어함유",
+    name: "WOLLY(400g) 캐시미어함유",
     category: "cone",
     material: "Wool / Cashmere Blend",
     price: 24000,
@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
-    name: "외국콘사38 BIZARRE(420g) 봄여름가을",
+    name: "BIZARRE(420g) 봄여름가을",
     category: "cone",
     material: "Viscose Blend",
     price: 26000,
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 3,
-    name: "외국콘사37 CHIC(420g) 봄여름",
+    name: "CHIC(420g) 봄여름",
     category: "cone",
     material: "Cotton Blend",
     price: 25000,
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 4,
-    name: "외국콘사36 ALLEGRO(420g) 봄여름",
+    name: "ALLEGRO(420g) 봄여름",
     category: "cone",
     material: "Linen Blend",
     price: 28000,
@@ -110,7 +110,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 5,
-    name: "외국콘사35 BATISTA 1456 TINTO(420g) 봄여름",
+    name: "BATISTA 1456 TINTO(420g) 봄여름",
     category: "cone",
     material: "Cotton Blend",
     price: 36000,
@@ -131,7 +131,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 6,
-    name: "외국콘사34 TIGNANELLO(420g) 여름",
+    name: "TIGNANELLO(420g) 여름",
     category: "cone",
     material: "Linen Blend",
     price: 24000,
@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 7,
-    name: "럭키콘사260 신축성이 있는 폴리혼합콘사(420g) 봄가을",
+    name: "신축성이 있는 폴리혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Poly/Wool Blend",
     price: 21000,
@@ -173,7 +173,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 8,
-    name: "럭키콘사259 다홍울혼합콘사(420g) 봄가을",
+    name: "다홍울혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Wool / Poly Blend",
     price: 23000,
@@ -194,7 +194,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 9,
-    name: "럭키콘사258 블랙울콘사(420g) 겨울",
+    name: "블랙울콘사(420g) 겨울",
     category: "cone",
     material: "Wool 100%",
     price: 32000,
@@ -215,7 +215,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 10,
-    name: "럭키콘사257 희끗하게 표현한 울혼합콘사(420g) 봄가을",
+    name: "희끗하게 표현한 울혼합콘사(420g) 봄가을",
     category: "cone",
     material: "Wool Blend",
     price: 29000,
@@ -422,7 +422,7 @@ export const PRODUCTS: Product[] = [
     isSale: false,
     colors: ["파우더 블루", "파우더 핑크", "허니 레몬"],
     colorHexes: ["#AED6F1", "#FADBD8", "#FFF44F"],
-    info: "포근함과 가벼운 면의 쾌적함을 블렌딩한 최고 품질의 사계절용 울코튼 혼방사입니다. 먼지가 없고 깔끔합니다.",
+    info: "포근함 and 가벼운 면의 쾌적함을 블렌딩한 최고 품질의 사계절용 울코튼 혼방사입니다. 먼지가 없고 깔끔합니다.",
     weight: "50g",
     needles: "대바늘 3.0mm ~ 4.0mm",
     wash: "중성세제 울샴푸 가볍게 세탁"
