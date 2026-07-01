@@ -22,13 +22,13 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   // ==========================================
-  // CONE YARNS (Goodsil Lucky Cone Yarns)
+  // CONE YARNS (10 Lucky Cone Yarns - All sharing same image)
   // ==========================================
   {
     id: 1,
     name: "[럭키콘사] BIZARRE 외국콘사 (420g)",
     category: "cone",
-    material: "Viscose Blend (Spring/Summer/Autumn)",
+    material: "Viscose Blend",
     price: 24000,
     origPrice: 28000,
     discount: 14,
@@ -49,11 +49,11 @@ export const PRODUCTS: Product[] = [
     id: 2,
     name: "[럭키콘사] CHIC 외국콘사 (420g)",
     category: "cone",
-    material: "Cotton Blend (Spring/Summer)",
+    material: "Cotton Blend",
     price: 26000,
     origPrice: 26000,
     discount: 0,
-    image: "/assets/cone_dustyrose.png",
+    image: "/assets/cone_yarn.png",
     rating: 4.7,
     reviews: 58,
     isBest: false,
@@ -67,14 +67,14 @@ export const PRODUCTS: Product[] = [
     wash: "드라이클리닝 권장 / 손세탁"
   },
   {
-    id: 11,
+    id: 3,
     name: "[럭키콘사] ALLEGRO 외국콘사 (420g)",
     category: "cone",
-    material: "Linen Blend (Spring/Summer)",
+    material: "Linen Blend",
     price: 25000,
     origPrice: 28000,
     discount: 10,
-    image: "/assets/cone_oatmeal.png",
+    image: "/assets/cone_yarn.png",
     rating: 4.9,
     reviews: 93,
     isBest: true,
@@ -82,20 +82,20 @@ export const PRODUCTS: Product[] = [
     isSale: true,
     colors: ["라벤더 드림", "올리브 카키", "밀크 바닐라", "차콜 그레이"],
     colorHexes: ["#E6E6FA", "#808000", "#F9E8D2", "#36454F"],
-    info: "쾌적하고 흐르는 듯한 드레이프성이 장점인 ALLEGRO 린넨 혼방 콘사입니다. 내추럴한 멋을 자아내며 가벼운 비치 카디건이나 숄을 뜨기에 아주 이상적인 실입니다.",
+    info: "쾌적하고 흐르는 듯한 드레이프성이 장점인 ALLEGRO 린넨 혼방 콘사입니다. 내추럴한 멋을 자아내며 가벼운 여름용 카디건이나 숄을 뜨기에 아주 이상적입니다.",
     weight: "약 420g",
     needles: "대바늘 2.5mm ~ 3.5mm / 코바늘 2/0호 ~ 4/0호",
     wash: "평평하게 그늘에서 건조 / 가벼운 찬물 단독 손세탁"
   },
   {
-    id: 12,
+    id: 4,
     name: "[럭키콘사] BATISTA 1456 TINTO (420g)",
     category: "cone",
-    material: "Premium Cotton 100% (Spring/Summer)",
+    material: "Premium Cotton 100%",
     price: 28000,
     origPrice: 28000,
     discount: 0,
-    image: "/assets/cone_pistachio.png",
+    image: "/assets/cone_yarn.png",
     rating: 4.6,
     reviews: 41,
     isBest: false,
@@ -103,16 +103,16 @@ export const PRODUCTS: Product[] = [
     isSale: false,
     colors: ["진달래 레드", "바다 블루", "버터 레몬", "미드나잇 블랙"],
     colorHexes: ["#C21E56", "#007791", "#FFF44F", "#111111"],
-    info: "나염 결이 예술적인 최고급 면 100% 럭키콘사 BATISTA 1456 TINTO입니다. 피부 자극이 단 1%도 없어 예민한 피부용 이너나 어린이용 보닛을 뜨기에 가장 이상적입니다.",
+    info: "나염 결이 예술적인 최고급 면 100% 럭키콘사 BATISTA 1456 TINTO입니다. 피부 자극이 없어 예민한 피부용 이너나 어린이용 보닛을 뜨기에 좋습니다.",
     weight: "약 420g",
     needles: "대바늘 3.0mm / 코바늘 3/0호",
     wash: "세탁망 사용 울코스 물세탁 가능"
   },
   {
-    id: 13,
+    id: 5,
     name: "[럭키콘사] WOLLY 캐시미어 함유 콘사 (400g)",
     category: "cone",
-    material: "Cashmere Blend (Autumn/Winter)",
+    material: "Cashmere Blend",
     price: 36000,
     origPrice: 40000,
     discount: 10,
@@ -124,17 +124,122 @@ export const PRODUCTS: Product[] = [
     isSale: true,
     colors: ["살구 코랄", "세이지 올리브", "스노우 화이트", "모카 브라운"],
     colorHexes: ["#FFCBA4", "#B2AC88", "#FDFBF7", "#7E5C46"],
-    info: "캐시미어가 함유되어 고급스럽고 따뜻한 겨울용 WOLLY 콘사입니다. 두께 대비 가벼운 기모 가공 처리가 되어 포근하며 겨울 가디건이나 목도리 등으로 명품 짜임을 느끼게 해줍니다.",
+    info: "캐시미어가 함유되어 고급스럽고 따뜻한 겨울용 WOLLY 콘사입니다. 가벼운 기모 가공 처리가 되어 포근하며 겨울 가디건이나 목도리 등으로 명품 질감을 선사합니다.",
     weight: "약 400g",
     needles: "대바늘 3.5mm ~ 4.5mm",
     wash: "드라이클리닝 필수"
   },
+  {
+    id: 6,
+    name: "[럭키콘사] TIGNANELLO 여름콘사 (420g)",
+    category: "cone",
+    material: "Linen/Cotton",
+    price: 24000,
+    origPrice: 24000,
+    discount: 0,
+    image: "/assets/cone_yarn.png",
+    rating: 4.5,
+    reviews: 19,
+    isBest: false,
+    isNew: false,
+    isSale: false,
+    colors: ["스카이 블루", "화이트 린넨", "샌드 베이지"],
+    colorHexes: ["#87CEEB", "#F8F8FF", "#E6D7C3"],
+    info: "여름철 더위를 날려줄 청량하고 가벼운 소재감의 수입 콘사입니다. 통기성과 통풍이 극대화되어 시원한 여름용 크로셰 나시 및 조끼 제작용 실입니다.",
+    weight: "약 420g",
+    needles: "대바늘 2.5mm ~ 3.5mm",
+    wash: "중성세제 울코스 세탁망 사용"
+  },
+  {
+    id: 7,
+    name: "[럭키콘사] 260 신축성 폴리혼합콘사 (420g)",
+    category: "cone",
+    material: "Poly/Wool Blend",
+    price: 21000,
+    origPrice: 23000,
+    discount: 8,
+    image: "/assets/cone_yarn.png",
+    rating: 4.7,
+    reviews: 26,
+    isBest: false,
+    isNew: false,
+    isSale: true,
+    colors: ["어텀 오렌지", "포레스트 그린", "카카오 블랙"],
+    colorHexes: ["#D35400", "#27AE60", "#2C3E50"],
+    info: "폴리에스터가 혼합되어 적당한 신축성과 높은 강도를 지닌 콘사입니다. 짜임새가 탄탄하게 완성되어 가방이나 파우치 등 변형 없이 오래 쓸 소품에 추천합니다.",
+    weight: "약 420g",
+    needles: "대바늘 3.0mm ~ 4.0mm",
+    wash: "미지근한 물에 가벼운 중성세제 세탁"
+  },
+  {
+    id: 8,
+    name: "[럭키콘사] 259 린넨 블렌드 콘사 (400g)",
+    category: "cone",
+    material: "Linen 50% + Cotton 50%",
+    price: 23000,
+    origPrice: 23000,
+    discount: 0,
+    image: "/assets/cone_yarn.png",
+    rating: 4.4,
+    reviews: 15,
+    isBest: false,
+    isNew: true,
+    isSale: false,
+    colors: ["머스타드 옐로우", "애프리콧 핑크", "네이비 마린"],
+    colorHexes: ["#FFC300", "#FFC0CB", "#1F3A52"],
+    info: "천연 린넨과 면을 반씩 혼합하여 최적의 부드러움과 시원함을 함께 잡아낸 콘사입니다. 가벼운 여름용 네트백이나 그물망 숄더백에 어울립니다.",
+    weight: "약 400g",
+    needles: "대바늘 2.5mm ~ 3.5mm / 코바늘 3/0호",
+    wash: "자연 그늘 건조"
+  },
+  {
+    id: 9,
+    name: "[럭키콘사] 258 엑스트라 파인 울 콘사 (500g)",
+    category: "cone",
+    material: "Extra Fine Wool 100%",
+    price: 32000,
+    origPrice: 35000,
+    discount: 8,
+    image: "/assets/cone_yarn.png",
+    rating: 4.9,
+    reviews: 34,
+    isBest: true,
+    isNew: false,
+    isSale: true,
+    colors: ["라벤더 포그", "세이지 멜란지", "크림 오트밀"],
+    colorHexes: ["#D6CADD", "#A3B899", "#FAF0E6"],
+    info: "메리노 중에서도 극도로 부드러운 부위만을 채취한 최고급 엑스트라 파인 울 콘사입니다. 극강의 솜사탕 터치로 까슬거림을 완전히 배제했습니다.",
+    weight: "약 500g",
+    needles: "대바늘 3.5mm ~ 4.5mm",
+    wash: "단독 중성세제 울샴푸 세탁"
+  },
+  {
+    id: 10,
+    name: "[럭키콘사] 257 실크 블렌딩 피치 콘사 (420g)",
+    category: "cone",
+    material: "Silk Blend",
+    price: 29000,
+    origPrice: 29000,
+    discount: 0,
+    image: "/assets/cone_yarn.png",
+    rating: 4.8,
+    reviews: 21,
+    isBest: false,
+    isNew: true,
+    isSale: false,
+    colors: ["코랄 핑크", "레몬 버터", "스모키 그레이"],
+    colorHexes: ["#F1948A", "#F9E79F", "#85929E"],
+    info: "천연 실크가 블렌딩되어 은은한 자연 윤기가 맴도는 프리미엄 피치 콘사입니다. 고급 여성 가디건이나 배색 의류를 뜰 때 기품을 불어넣습니다.",
+    weight: "약 420g",
+    needles: "대바늘 3.0mm ~ 3.5mm",
+    wash: "드라이클리닝 권장"
+  },
 
   // ==========================================
-  // BALL YARNS (Sevy Yarns)
+  // BALL YARNS (10 Sevy Yarns - All sharing same image)
   // ==========================================
   {
-    id: 3,
+    id: 30,
     name: "[세비] 하비울 Hobby Wool (50g)",
     category: "ball",
     material: "Wool 50% + Acrylic 50%",
@@ -155,14 +260,14 @@ export const PRODUCTS: Product[] = [
     wash: "미지근한 물에 중성세제 손세탁 / 건조기 사용 절대 금지"
   },
   {
-    id: 4,
+    id: 31,
     name: "[세비] 미스티 Misty 모헤어 (25g)",
     category: "ball",
     material: "Kid Mohair 60% + Polyamide 40%",
     price: 9000,
     origPrice: 9000,
     discount: 0,
-    image: "/assets/ball_lavender.png",
+    image: "/assets/ball_yarn.png",
     rating: 4.9,
     reviews: 72,
     isBest: false,
@@ -176,14 +281,14 @@ export const PRODUCTS: Product[] = [
     wash: "미온수 울샴푸 단독 손세탁"
   },
   {
-    id: 5,
+    id: 32,
     name: "[세비] 올림푸스 모후 Olympus Mohu (40g)",
     category: "ball",
     material: "Supima Cotton Blend",
     price: 8800,
     origPrice: 8800,
     discount: 0,
-    image: "/assets/ball_mint.png",
+    image: "/assets/ball_yarn.png",
     rating: 4.7,
     reviews: 33,
     isBest: false,
@@ -191,16 +296,16 @@ export const PRODUCTS: Product[] = [
     isSale: false,
     colors: ["라일락", "세이지 그린", "밀크 버터", "다크 차콜"],
     colorHexes: ["#C8A2C8", "#B2AC88", "#F3E5AB", "#333333"],
-    info: "일본 올림푸스 사의 프리미엄 수피마 면 혼합사 모후(Mohu)입니다. 보드라운 벨벳 같은 질감에 면 특유의 쾌적함이 가미되어, 계절을 크게 타지 않는 내추럴 크로셰 니트나 에코백 뜨기에 추천합니다.",
+    info: "일본 올림푸스 사의 프리미엄 수피마 면 혼합사 모후(Mohu)입니다. 보드라운 벨벳 같은 질감에 면 특유의 쾌적함이 가미되어, 계절을 크게 타지 않는 내추럴 니트나 에코백 뜨기에 추천합니다.",
     weight: "40g",
     needles: "코바늘 4/0호 ~ 5/0호",
     wash: "중성세제 단독 손세탁"
   },
   {
-    id: 6,
-    name: "[세비] 몬디알 슈퍼 트위드 Super Tweed (50g)",
+    id: 33,
+    name: "[세비] 몬디알 슈퍼 트위드 (50g)",
     category: "ball",
-    material: "Merino Wool 80% + Acrylic 20% (Tweed)",
+    material: "Merino Wool 80% + Acrylic 20%",
     price: 11700,
     origPrice: 13000,
     discount: 10,
@@ -218,7 +323,7 @@ export const PRODUCTS: Product[] = [
     wash: "드라이클리닝 권장 / 손세탁"
   },
   {
-    id: 7,
+    id: 34,
     name: "[세비] 베이비 알파카 코튼 (50g)",
     category: "ball",
     material: "Baby Alpaca Blend",
@@ -237,6 +342,111 @@ export const PRODUCTS: Product[] = [
     weight: "50g",
     needles: "대바늘 3.5mm ~ 4.0mm / 코바늘 5/0호",
     wash: "중성세제 울샴푸 가볍게 세탁"
+  },
+  {
+    id: 35,
+    name: "[세비] 몬디알 수아브 멜란지 (50g)",
+    category: "ball",
+    material: "Merino Wool Blend",
+    price: 9800,
+    origPrice: 9800,
+    discount: 0,
+    image: "/assets/ball_yarn.png",
+    rating: 4.6,
+    reviews: 24,
+    isBest: false,
+    isNew: false,
+    isSale: false,
+    colors: ["멜란지 퍼플", "멜란지 올리브", "멜란지 그레이"],
+    colorHexes: ["#A569BD", "#556B2F", "#7F8C8D"],
+    info: "자연스러운 기모감과 멜란지 톤이 어우러져 깊고 풍성한 무드를 주는 몬디알의 이태리 수입 모사입니다. 입체감 있는 꽈배기 뜨기나 자카드 패턴에 적합합니다.",
+    weight: "50g",
+    needles: "대바늘 4.0mm",
+    wash: "중성세제 울샴푸 손세탁"
+  },
+  {
+    id: 36,
+    name: "[세비] 몬디알 몰토베네 (50g)",
+    category: "ball",
+    material: "Wool/Acrylic",
+    price: 10800,
+    origPrice: 12000,
+    discount: 10,
+    image: "/assets/ball_yarn.png",
+    rating: 4.8,
+    reviews: 41,
+    isBest: true,
+    isNew: true,
+    isSale: true,
+    colors: ["베리 믹스", "포레스트 믹스", "카라멜 믹스"],
+    colorHexes: ["#E74C3C", "#1E8449", "#D35400"],
+    info: "여러 가닥의 실이 독특하게 믹스되어 단독 뜨기만 해도 그 자체로 나염 예술을 선사하는 몬디알의 몰토베네입니다. 초보자용 비니나 자이언트 목도리에 강추합니다.",
+    weight: "50g",
+    needles: "대바늘 5.0mm ~ 6.0mm",
+    wash: "울세제 단독 손세탁"
+  },
+  {
+    id: 37,
+    name: "[세비] 메리노 코튼 (50g)",
+    category: "ball",
+    material: "Merino Wool 50% + Cotton 50%",
+    price: 8800,
+    origPrice: 8800,
+    discount: 0,
+    image: "/assets/ball_yarn.png",
+    rating: 4.7,
+    reviews: 18,
+    isBest: false,
+    isNew: false,
+    isSale: false,
+    colors: ["파우더 핑크", "아쿠아 블루", "허니 버터"],
+    colorHexes: ["#FADBD8", "#AED6F1", "#F9E79F"],
+    info: "메리노 울의 보온성과 코튼의 보드라운 통기성을 정확히 절반씩 블렌딩한 간절기용 데일리 실입니다. 보풀이나 먼지 날림이 극히 적어 실용적입니다.",
+    weight: "50g",
+    needles: "대바늘 3.0mm ~ 4.0mm",
+    wash: "중성세제 울샴푸 가볍게 세탁"
+  },
+  {
+    id: 38,
+    name: "[세비] 올림푸스 에미 그란데 (50g)",
+    category: "ball",
+    material: "Egyptian Cotton 100%",
+    price: 11000,
+    origPrice: 11000,
+    discount: 0,
+    image: "/assets/ball_yarn.png",
+    rating: 4.9,
+    reviews: 22,
+    isBest: false,
+    isNew: true,
+    isSale: false,
+    colors: ["로즈 골드", "에메랄드 그린", "리얼 화이트"],
+    colorHexes: ["#CD7F32", "#117A65", "#FDFEFE"],
+    info: "이집트 최고급 초장면 100%로 제작된 광택 있고 고운 고급 면사입니다. 코바늘 전용 레이스, 꽃 모티브, 드림캐처 등의 크로셰 세공 소품에 아름다운 빛을 더합니다.",
+    weight: "50g",
+    needles: "코바늘 레이스 0호 ~ 2호",
+    wash: "손세탁 후 평평하게 건조"
+  },
+  {
+    id: 39,
+    name: "[세비] 필 다하르 대용량 볼사 (100g)",
+    category: "ball",
+    material: "Wool Blend",
+    price: 12600,
+    origPrice: 14000,
+    discount: 10,
+    image: "/assets/ball_yarn.png",
+    rating: 4.8,
+    reviews: 15,
+    isBest: false,
+    isNew: false,
+    isSale: true,
+    colors: ["머스타드 옐로우", "차콜 헤더", "카카오 브라운"],
+    colorHexes: ["#D4AC0D", "#2E4053", "#5D4037"],
+    info: "100g 대용량 볼사 제품으로 조각 연결 없이 롱 머플러나 꽈배기 모자를 단 한두 볼로 가볍게 완성할 수 있도록 실용적으로 구성된 원사입니다.",
+    weight: "100g",
+    needles: "대바늘 4.0mm ~ 5.0mm",
+    wash: "울세제 단독 손세탁"
   },
 
   // ==========================================
@@ -304,7 +514,7 @@ export const PRODUCTS: Product[] = [
     isSale: true,
     colors: ["심포니 우드 패키지"],
     colorHexes: ["#A0522D"],
-    info: "세계적인 뜨개 명가 니트프로(KnitPro)의 조립식 목바늘 플래그십 세트입니다. 특유 of 다채로운 적층 자작나무 결이 고급스럽고, 실의 미끄러짐이 적당하여 초보자도 코를 빠뜨리지 않고 부드럽게 뜰 수 있습니다. 줄 꼬임 방지 스위블 케이블이 포함되어 있습니다.",
+    info: "세계적인 뜨개 명가 니트프로(KnitPro)의 조립식 목바늘 플래그십 세트입니다. 특유의 다채로운 적층 자작나무 결이 고급스럽고, 실의 미끄러짐이 적당하여 초보자도 코를 빠뜨리지 않고 부드럽게 뜰 수 있습니다. 줄 꼬임 방지 스위블 케이블이 포함되어 있습니다.",
     weight: "구성: 바늘 팁 8쌍 (3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 7.0, 8.0mm), 케이블 4개, 스토퍼 8개, 조임키 4개, 투명 파우치",
     needles: "3.5mm ~ 8.0mm 조립형",
     wash: "수분에 약하므로 젖은 천이나 침수 보관을 피하고 전용 오일로 닦아 관리"
@@ -377,88 +587,3 @@ export const PRODUCTS: Product[] = [
     wash: "무형물 콘텐츠 특성상 메일 발송 후에는 환불이 불가합니다."
   }
 ];
-
-export const getYarnImage = (category: string, colorName: string, defaultImage: string): string => {
-  if (category === "cone") {
-    const name = colorName.toLowerCase();
-    if (
-      name.includes("핑크") ||
-      name.includes("로즈") ||
-      name.includes("쿼츠") ||
-      name.includes("모브") ||
-      name.includes("레드") ||
-      name.includes("오렌지") ||
-      name.includes("탠저린") ||
-      name.includes("라벤더") ||
-      name.includes("퍼플") ||
-      name.includes("보라") ||
-      name.includes("와인")
-    ) {
-      return "/assets/cone_dustyrose.png";
-    }
-    if (
-      name.includes("그린") ||
-      name.includes("민트") ||
-      name.includes("피스타치오") ||
-      name.includes("올리브") ||
-      name.includes("카키") ||
-      name.includes("세이지") ||
-      name.includes("블러썸") ||
-      name.includes("아쿠아") ||
-      name.includes("블루") ||
-      name.includes("스카이") ||
-      name.includes("소라") ||
-      name.includes("바다")
-    ) {
-      return "/assets/cone_pistachio.png";
-    }
-    if (
-      name.includes("아이보리") ||
-      name.includes("크림") ||
-      name.includes("화이트") ||
-      name.includes("오트밀") ||
-      name.includes("연유") ||
-      name.includes("레몬") ||
-      name.includes("옐로우") ||
-      name.includes("버터") ||
-      name.includes("밀크")
-    ) {
-      return "/assets/cone_oatmeal.png";
-    }
-    return "/assets/cone_yarn.png";
-  } else if (category === "ball") {
-    const name = colorName.toLowerCase();
-    if (
-      name.includes("핑크") ||
-      name.includes("로즈") ||
-      name.includes("페탈") ||
-      name.includes("라벤더") ||
-      name.includes("퍼플") ||
-      name.includes("라일락") ||
-      name.includes("체리") ||
-      name.includes("피치") ||
-      name.includes("애프리콧") ||
-      name.includes("버블검") ||
-      name.includes("와인") ||
-      name.includes("레드") ||
-      name.includes("포그")
-    ) {
-      return "/assets/ball_lavender.png";
-    }
-    if (
-      name.includes("민트") ||
-      name.includes("그린") ||
-      name.includes("올리브") ||
-      name.includes("카키") ||
-      name.includes("세이지") ||
-      name.includes("라임") ||
-      name.includes("스윗") ||
-      name.includes("아쿠아") ||
-      name.includes("소다")
-    ) {
-      return "/assets/ball_mint.png";
-    }
-    return "/assets/ball_yarn.png";
-  }
-  return defaultImage;
-};

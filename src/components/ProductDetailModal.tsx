@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { X, Star, Heart, ShoppingBag, CreditCard, Minus, Plus } from "lucide-react";
-import { Product, getYarnImage } from "@/data/products";
+import { Product } from "@/data/products";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -35,14 +35,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       setSelectedColor(initialSelectedColor || product.colors[0]);
       setQuantity(1);
       setActiveTab("detail");
+      setMainImage(product.image);
     }
   }, [product, initialSelectedColor]);
-
-  useEffect(() => {
-    if (product && selectedColor) {
-      setMainImage(getYarnImage(product.category, selectedColor, product.image));
-    }
-  }, [selectedColor, product]);
 
   if (!isOpen || !product) return null;
 
@@ -53,8 +48,6 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       setQuantity(val);
     }
   };
-
-  const currentColorImage = getYarnImage(product.category, selectedColor, product.image);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -82,12 +75,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
             <div className="flex gap-4">
               <button
-                onClick={() => setMainImage(currentColorImage)}
+                onClick={() => setMainImage(product.image)}
                 className={`w-20 h-20 rounded-xl overflow-hidden bg-brand-light border-2 transition-colors ${
-                  mainImage !== "/assets/pattern_image.png" ? "border-brand-primary" : "border-brand-light-gray"
+                  mainImage === product.image ? "border-brand-primary" : "border-brand-light-gray"
                 }`}
               >
-                <img src={currentColorImage} alt="Thumbnail 1" className="w-full h-full object-cover" />
+                <img src={product.image} alt="Thumbnail 1" className="w-full h-full object-cover" />
               </button>
               <button
                 onClick={() => setMainImage("/assets/pattern_image.png")}

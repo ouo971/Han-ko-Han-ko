@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Star, Heart, ShoppingCart } from "lucide-react";
-import { Product, getYarnImage } from "@/data/products";
+import { Product } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;
@@ -21,7 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const { id, name, material, price, origPrice, discount, image, rating, reviews, isBest, isNew } = product;
 
-  // Selected color index state
+  // Selected color index state (used to pass selected color to Cart and Modal)
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
 
   // Determine badge markup
@@ -37,9 +37,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     badgeText = "NEW";
     badgeBg = "bg-brand-primary";
   }
-
-  // Get matching image for current selected color
-  const currentImage = getYarnImage(product.category, product.colors[selectedColorIdx], image);
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-brand-light-gray transition-all duration-300 flex flex-col group relative animate-fade-in-up">
@@ -72,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         className="relative aspect-square w-full overflow-hidden bg-brand-light cursor-pointer group"
       >
         <img
-          src={currentImage}
+          src={image}
           alt={name}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
