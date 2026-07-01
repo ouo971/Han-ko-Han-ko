@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { X, Star, Heart, ShoppingBag, CreditCard, Minus, Plus } from "lucide-react";
-import { Product } from "@/data/products";
+import { Product, getYarnImage } from "@/data/products";
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -35,9 +35,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       setSelectedColor(initialSelectedColor || product.colors[0]);
       setQuantity(1);
       setActiveTab("detail");
-      setMainImage(product.image);
     }
   }, [product, initialSelectedColor]);
+
+  useEffect(() => {
+    if (product && selectedColor) {
+      setMainImage(getYarnImage(product.category, selectedColor, product.image));
+    }
+  }, [selectedColor, product]);
 
   if (!isOpen || !product) return null;
 
@@ -48,6 +53,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       setQuantity(val);
     }
   };
+
+  const currentColorImage = getYarnImage(product.category, selectedColor, product.image);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -72,24 +79,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           <div className="space-y-4">
             <div className="aspect-square w-full rounded-2xl overflow-hidden bg-brand-light border border-brand-light-gray relative">
               <img src={mainImage} alt={product.name} className="w-full h-full object-cover" />
-              {/* Dynamic Color Tint Overlay */}
-              {product.colorHexes && mainImage === product.image && (
-                <div
-                  className="absolute inset-0 pointer-events-none transition-all duration-300 mix-blend-color opacity-35"
-                  style={{
-                    backgroundColor: product.colorHexes[product.colors.indexOf(selectedColor)] || "#ccc",
-                  }}
-                />
-              )}
             </div>
             <div className="flex gap-4">
               <button
-                onClick={() => setMainImage(product.image)}
+                onClick={() => setMainImage(currentColorImage)}
                 className={`w-20 h-20 rounded-xl overflow-hidden bg-brand-light border-2 transition-colors ${
-                  mainImage === product.image ? "border-brand-primary" : "border-brand-light-gray"
+                  mainImage !== "/assets/pattern_image.png" ? "border-brand-primary" : "border-brand-light-gray"
                 }`}
               >
-                <img src={product.image} alt="Thumbnail 1" className="w-full h-full object-cover" />
+                <img src={currentColorImage} alt="Thumbnail 1" className="w-full h-full object-cover" />
               </button>
               <button
                 onClick={() => setMainImage("/assets/pattern_image.png")}

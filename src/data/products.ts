@@ -1007,3 +1007,89 @@ export const PRODUCTS: Product[] = [
     wash: "무형물 콘텐츠 특성상 메일 발송 후에는 환불이 불가합니다."
   }
 ];
+
+export const getYarnImage = (category: string, colorName: string, defaultImage: string): string => {
+  if (category === "cone") {
+    const name = colorName.toLowerCase();
+    if (
+      name.includes("핑크") ||
+      name.includes("로즈") ||
+      name.includes("쿼츠") ||
+      name.includes("모브") ||
+      name.includes("레드") ||
+      name.includes("오렌지") ||
+      name.includes("탠저린") ||
+      name.includes("라벤더") ||
+      name.includes("퍼플") ||
+      name.includes("보라") ||
+      name.includes("와인")
+    ) {
+      return "/assets/cone_dustyrose.png";
+    }
+    if (
+      name.includes("그린") ||
+      name.includes("민트") ||
+      name.includes("피스타치오") ||
+      name.includes("올리브") ||
+      name.includes("카키") ||
+      name.includes("세이지") ||
+      name.includes("블러썸") ||
+      name.includes("아쿠아") ||
+      name.includes("블루") ||
+      name.includes("스카이") ||
+      name.includes("소라") ||
+      name.includes("바다")
+    ) {
+      return "/assets/cone_pistachio.png";
+    }
+    if (
+      name.includes("아이보리") ||
+      name.includes("크림") ||
+      name.includes("화이트") ||
+      name.includes("오트밀") ||
+      name.includes("연유") ||
+      name.includes("레몬") ||
+      name.includes("옐로우") ||
+      name.includes("버터") ||
+      name.includes("밀크")
+    ) {
+      return "/assets/cone_oatmeal.png";
+    }
+    return "/assets/cone_yarn.png";
+  } else if (category === "ball") {
+    const name = colorName.toLowerCase();
+    if (
+      name.includes("핑크") ||
+      name.includes("로즈") ||
+      name.includes("페탈") ||
+      name.includes("라벤더") ||
+      name.includes("퍼플") ||
+      name.includes("라일락") ||
+      name.includes("체리") ||
+      name.includes("피치") ||
+      name.includes("애프리콧") ||
+      name.includes("버블검") ||
+      name.includes("와인") ||
+      name.includes("레드") ||
+      name.includes("포그")
+    ) {
+      return "/assets/ball_lavender.png";
+    }
+    if (
+      name.includes("민트") ||
+      name.includes("그린") ||
+      name.includes("올리브") ||
+      name.includes("카키") ||
+      name.includes("세이지") ||
+      name.includes("라임") ||
+      name.includes("스윗") ||
+      name.includes("아쿠아") ||
+      name.includes("소다")
+    ) {
+      return "/assets/ball_mint.png";
+    }
+    return "/assets/ball_yarn.png";
+  }
+  return defaultImage;
+};
+
