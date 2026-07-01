@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Bot, User, CornerDownRight } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 
 interface Message {
   id: string;
-  sender: "bot" | "user";
+  sender: "bot" | "user" | "admin";
   text: string;
   timestamp: Date;
 }
@@ -15,6 +15,7 @@ export const ChatBotWidget: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isAgentConnected, setIsAgentConnected] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Initialize with greeting
@@ -31,39 +32,176 @@ export const ChatBotWidget: React.FC = () => {
     }
   }, [messages.length]);
 
+  // Sync conversation with localStorage hanko_active_chat in real-time
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const syncChat = () => {
+      const storedChat = localStorage.getItem("hanko_active_chat");
+      if (storedChat) {
+        const chatObj = JSON.parse(storedChat);
+        if (chatObj.status === "active") {
+          setIsAgentConnected(true);
+          // Convert ISO timestamps back to JavaScript Date objects
+          const formattedMsgs = chatObj.messages.map((m: any) => ({
+            id: m.id,
+            sender: m.sender,
+            text: m.text,
+            timestamp: m.timestamp ? new Date(m.timestamp) : new Date(),
+          }));
+          setMessages(formattedMsgs);
+        } else if (chatObj.status === "closed" && isAgentConnected) {
+          setIsAgentConnected(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `system-end-${Date.now()}`,
+              sender: "bot",
+              text: "상담원과의 1:1 대화가 종료되었습니다. 🧶",
+              timestamp: new Date(),
+            },
+          ]);
+          localStorage.removeItem("hanko_active_chat");
+        }
+      }
+    };
+
+    syncChat();
+    // Poll every 1.5 seconds to sync chat message history
+    const interval = setInterval(syncChat, 1500);
+    return () => clearInterval(interval);
+  }, [isOpen, isAgentConnected]);
+
   // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
+  const handleConnectToAgent = () => {
+    if (isAgentConnected) return;
+
+    let clientName = "비회원 고객";
+    try {
+      const storedUser = localStorage.getItem("hanko_user");
+      if (storedUser) {
+        clientName = JSON.parse(storedUser).name;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    const systemMsg: Message = {
+      id: `system-connect-${Date.now()}`,
+      sender: "bot",
+      text: "상담원 연결을 요청하셨습니다. 잠시만 기다려주세요... 🎧",
+      timestamp: new Date(),
+    };
+
+    const newLocalMsgs = [...messages, systemMsg];
+    setMessages(newLocalMsgs);
+    setIsAgentConnected(true);
+
+    // Save active chat channel session to localStorage
+    const activeChatSession = {
+      userId: `user-${Date.now()}`,
+      userName: clientName,
+      status: "active",
+      agentConnected: false,
+      messages: newLocalMsgs.map((m) => ({
+        id: m.id,
+        sender: m.sender,
+        text: m.text,
+        timestamp: m.timestamp.toISOString(),
+      })),
+    };
+
+    localStorage.setItem("hanko_active_chat", JSON.stringify(activeChatSession));
+
+    // Simulate Agent connection message after 2.5s if not already responded by administrator
+    setTimeout(() => {
+      const latestChat = localStorage.getItem("hanko_active_chat");
+      if (latestChat) {
+        const chatObj = JSON.parse(latestChat);
+        const hasAdminMsg = chatObj.messages.some((m: any) => m.sender === "admin");
+        if (!hasAdminMsg && chatObj.status === "active") {
+          const connectMsg: Message = {
+            id: `system-connected-${Date.now()}`,
+            sender: "bot",
+            text: "🔔 상담원(대표 박유진)님이 연결되었습니다. 문의하실 사항을 편하게 말씀해 주세요! 🧶",
+            timestamp: new Date(),
+          };
+
+          const updatedMsgs = [
+            ...chatObj.messages,
+            {
+              id: connectMsg.id,
+              sender: connectMsg.sender,
+              text: connectMsg.text,
+              timestamp: connectMsg.timestamp.toISOString(),
+            },
+          ];
+
+          chatObj.messages = updatedMsgs;
+          localStorage.setItem("hanko_active_chat", JSON.stringify(chatObj));
+          setMessages((prev) => [...prev, connectMsg]);
+        }
+      }
+    }, 2500);
+  };
+
   const handleSend = (text: string) => {
     if (!text.trim()) return;
 
-    // Add user message
     const userMsg: Message = {
       id: `user-${Date.now()}`,
       sender: "user",
       text,
       timestamp: new Date(),
     };
-    setMessages((prev) => [...prev, userMsg]);
     setInput("");
 
-    // Simulate bot response
-    setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
-      const botReply = getBotResponse(text);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `bot-${Date.now()}`,
-          sender: "bot",
-          text: botReply,
-          timestamp: new Date(),
-        },
-      ]);
-    }, 1000);
+    if (isAgentConnected) {
+      // Direct push to local storage for admin synchronization
+      const storedChat = localStorage.getItem("hanko_active_chat");
+      if (storedChat) {
+        const chatObj = JSON.parse(storedChat);
+        chatObj.messages.push({
+          id: userMsg.id,
+          sender: "user",
+          text: userMsg.text,
+          timestamp: userMsg.timestamp.toISOString(),
+        });
+        localStorage.setItem("hanko_active_chat", JSON.stringify(chatObj));
+      }
+      setMessages((prev) => [...prev, userMsg]);
+    } else {
+      // Normal bot reply
+      setMessages((prev) => [...prev, userMsg]);
+
+      // If user typed "상담원" or "연결", trigger agent connection
+      const lower = text.toLowerCase();
+      if (lower.includes("상담원") || lower.includes("연결") || lower.includes("사람")) {
+        setTimeout(() => {
+          handleConnectToAgent();
+        }, 800);
+        return;
+      }
+
+      setIsTyping(true);
+      setTimeout(() => {
+        setIsTyping(false);
+        const botReply = getBotResponse(text);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: `bot-${Date.now()}`,
+            sender: "bot",
+            text: botReply,
+            timestamp: new Date(),
+          },
+        ]);
+      }, 1000);
+    }
   };
 
   const getBotResponse = (query: string): string => {
@@ -89,12 +227,11 @@ export const ChatBotWidget: React.FC = () => {
       return "🏢 현재 오프라인 아틀리에 매장은 운영하고 있지 않으며, 차후 오픈 예정입니다! 오픈 일정이 확정되면 공지사항을 통해 소식을 전해드리겠습니다. 조금만 기다려 주세요! ☕";
     }
 
-    // Default responses
-    return "뜨개질 중 어려움이 있으시거나 궁금한 사항이 있다면 언제든 편하게 물어보세요! 친절한 '코코'가 바로 가이드해 드릴게요. 🧶";
+    return "뜨개질 중 어려움이 있으시거나 궁금한 사항이 있다면 언제든 편하게 물어보세요! 친절한 '코코'가 바로 가이드해 드릴게요. 1:1로 직접 직원과 대화하고 싶으시면 왼쪽 아래 '상담원 연결' 버튼을 탭해 주세요. 🧶";
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className="fixed bottom-6 right-6 z-55 font-sans">
       {/* Floating Chat Button */}
       {!isOpen && (
         <button
@@ -119,11 +256,15 @@ export const ChatBotWidget: React.FC = () => {
           <div className="bg-brand-dark p-4 text-white flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-brand-dark">
-                <Bot className="w-4.5 h-4.5" />
+                {isAgentConnected ? <User className="w-4.5 h-4.5" /> : <Bot className="w-4.5 h-4.5" />}
               </div>
               <div>
-                <h4 className="text-xs font-bold tracking-wide">한코 챗봇 상담센터</h4>
-                <span className="text-[10px] text-brand-primary font-light block -mt-0.5">상담원 코코가 실시간 대기 중입니다.</span>
+                <h4 className="text-xs font-bold tracking-wide">
+                  {isAgentConnected ? "상담원 박유진 연결 중" : "한코 챗봇 상담센터"}
+                </h4>
+                <span className="text-[10px] text-brand-primary font-light block -mt-0.5">
+                  {isAgentConnected ? "실시간 메신저가 활성화되었습니다." : "상담원 코코가 실시간 대기 중입니다."}
+                </span>
               </div>
             </div>
             <button
@@ -136,18 +277,24 @@ export const ChatBotWidget: React.FC = () => {
 
           {/* Message Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-brand-light/35 scrollbar-thin">
-            {messages.map((msg) => (
+            {messages.map((msg, idx) => (
               <div
-                key={msg.id}
+                key={msg.id || idx}
                 className={`flex gap-2.5 ${msg.sender === "user" ? "flex-row-reverse" : "flex-row"}`}
               >
                 {/* Avatar */}
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs shrink-0 ${
-                    msg.sender === "bot" ? "bg-brand-primary text-brand-dark" : "bg-brand-dark text-white"
+                    msg.sender === "user" ? "bg-brand-dark text-white" : "bg-brand-primary text-brand-dark"
                   }`}
                 >
-                  {msg.sender === "bot" ? <Bot className="w-3.5 h-3.5" /> : <User className="w-3.5 h-3.5" />}
+                  {msg.sender === "user" ? (
+                    <User className="w-3.5 h-3.5" />
+                  ) : msg.sender === "admin" ? (
+                    <User className="w-3.5 h-3.5" />
+                  ) : (
+                    <Bot className="w-3.5 h-3.5" />
+                  )}
                 </div>
 
                 {/* Message Content */}
@@ -156,6 +303,8 @@ export const ChatBotWidget: React.FC = () => {
                     className={`rounded-2xl px-4 py-2.5 text-xs shadow-sm leading-relaxed ${
                       msg.sender === "user"
                         ? "bg-brand-primary text-brand-dark font-medium rounded-tr-none"
+                        : msg.sender === "admin"
+                        ? "bg-brand-dark text-white rounded-tl-none"
                         : "bg-white text-brand-dark border border-brand-light-gray rounded-tl-none"
                     }`}
                   >
@@ -187,6 +336,15 @@ export const ChatBotWidget: React.FC = () => {
 
           {/* Quick Recommend Buttons */}
           <div className="p-3 bg-white border-t border-brand-light-gray flex gap-2 overflow-x-auto hide-scrollbar shrink-0">
+            {!isAgentConnected && (
+              <button
+                type="button"
+                onClick={handleConnectToAgent}
+                className="text-[10px] sm:text-xs bg-brand-accent text-white px-3 py-1.5 rounded-full border border-transparent hover:bg-brand-accent/90 transition-colors font-semibold shrink-0 cursor-pointer shadow-sm"
+              >
+                🎧 상담원 연결
+              </button>
+            )}
             <button
               onClick={() => handleSend("🚚 배송 일정이 궁금해요")}
               className="text-[10px] sm:text-xs bg-brand-light text-brand-dark px-3 py-1.5 rounded-full border border-brand-light-gray/60 hover:bg-brand-primary/20 hover:border-brand-primary transition-colors shrink-0"
@@ -225,7 +383,7 @@ export const ChatBotWidget: React.FC = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="메시지를 입력하세요..."
+              placeholder={isAgentConnected ? "상담원에게 실시간 문의..." : "메시지를 입력하세요..."}
               className="flex-1 bg-white border border-brand-light-gray/80 rounded-full px-4 py-2 text-xs text-brand-dark focus:outline-none focus:ring-1 focus:ring-brand-primary"
             />
             <button

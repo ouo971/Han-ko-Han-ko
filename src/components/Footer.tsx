@@ -2,7 +2,11 @@
 
 import React from "react";
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenAdmin?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   return (
     <footer className="bg-[#352B21] text-[#E2DDD6] py-16 border-t-3 border-brand-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 text-sm">
@@ -17,6 +21,14 @@ export const Footer: React.FC = () => {
           </div>
           <p className="text-[10px] text-[#E2DDD6]/40 mt-6 font-light">
             Copyright &copy; 2026 Han-ko Han-ko. All rights reserved.
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="ml-3 hover:text-brand-primary underline transition-colors cursor-pointer"
+              >
+                ⚙️ 관리자 모드
+              </button>
+            )}
           </p>
         </div>
 

@@ -12,6 +12,7 @@ import { SuccessOverlay } from "@/components/SuccessOverlay";
 import { AuthModal } from "@/components/AuthModal";
 import { QnaBoard } from "@/components/QnaBoard";
 import { ChatBotWidget } from "@/components/ChatBotWidget";
+import { AdminPanel } from "@/components/AdminPanel";
 import { KnittingLounge } from "@/components/KnittingLounge";
 import { Footer } from "@/components/Footer";
 import { Product, PRODUCTS } from "@/data/products";
@@ -33,6 +34,9 @@ export default function Home() {
   // --- Auth & Profile State ---
   const [currentUser, setCurrentUser] = useState<{ name: string; email: string; phone: string; address: string } | null>(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+
+  // --- Admin Panel State ---
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
 
   // --- Modal & Drawer Open States ---
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -188,7 +192,26 @@ export default function Home() {
   };
 
   // --- Checkout flow ---
-  const handleOrderSuccess = (orderId: string, address: string, finalPrice: string) => {
+  const handleOrderSuccess = (orderId: string, address: string, finalPrice: string, orderDetails: any) => {
+    // Save order data to local storage for administrator inspection
+    try {
+      const storedOrders = localStorage.getItem("hanko_orders");
+      const ordersList = storedOrders ? JSON.parse(storedOrders) : [];
+      ordersList.unshift({
+        id: orderId,
+        date: new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" }),
+        address,
+        finalPrice,
+        items: orderDetails.items,
+        customer: orderDetails.customer,
+        payment: orderDetails.payment,
+        status: "결제완료",
+      });
+      localStorage.setItem("hanko_orders", JSON.stringify(ordersList));
+    } catch (e) {
+      console.error("Failed to append order to local storage", e);
+    }
+
     // Save order info to display in success ticket
     setCheckoutSuccess({ orderId, address, finalPrice });
 
@@ -243,7 +266,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenAdmin={() => setIsAdminOpen(true)} />
 
       {/* Toast Notification Container */}
       {toastMessage && (
@@ -318,6 +341,9 @@ export default function Home() {
 
       {/* Chatbot Floating Widget */}
       <ChatBotWidget />
+
+      {/* Admin Panel Dashboard Overlay */}
+      <AdminPanel isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
     </div>
   );
 }

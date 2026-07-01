@@ -15,7 +15,16 @@ interface CheckoutModalProps {
   onClose: () => void;
   cart: CartItem[];
   currentUser: { name: string; email: string; phone: string; address: string } | null;
-  onOrderSuccess: (orderId: string, address: string, finalPrice: string) => void;
+  onOrderSuccess: (
+    orderId: string,
+    address: string,
+    finalPrice: string,
+    orderDetails: {
+      items: Array<{ product: { id: number; name: string; price: number }; color: string; quantity: number }>;
+      customer: { name: string; phone: string; email: string };
+      payment: { method: string; detail: string };
+    }
+  ) => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -121,7 +130,30 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       const randomNum = Math.floor(1000 + Math.random() * 9000);
       const generatedOrderId = `HK${dateStr}-${randomNum}`;
 
-      onOrderSuccess(generatedOrderId, address, totalStr);
+      const paymentDetail = paymentMethod === "card"
+        ? `카드 ${cardNumber.slice(0, 7)}...`
+        : paymentMethod === "easy"
+        ? `${easyProvider === "kakao" ? "카카오페이" : "네이버페이"}`
+        : `${selectedBank === "kb" ? "국민은행" : selectedBank === "shinhan" ? "신한은행" : "우리은행"} (입금자: ${depositor})`;
+
+      const orderDetails = {
+        items: cart.map(item => ({
+          product: {
+            id: item.product.id,
+            name: item.product.name,
+            price: item.product.price
+          },
+          color: item.color,
+          quantity: item.quantity
+        })),
+        customer: { name, phone, email },
+        payment: {
+          method: paymentMethod === "card" ? "신용카드" : paymentMethod === "easy" ? "간편결제" : "무통장입금",
+          detail: paymentDetail
+        }
+      };
+
+      onOrderSuccess(generatedOrderId, address, totalStr, orderDetails);
       onClose();
     }, 2000);
   };
